@@ -1,29 +1,18 @@
 import React from 'react';
 import Job from '../Job/Job';
+import { useEffect, useState } from 'react';
 
-const jobs=[
-    {
-        jobTitle:'Web Developer',
-        type:'Part Time',
-        sallary:30,
-        author:'AKK'
-    },
-    {
-        jobTitle:'Software Developer',
-        type:'Part Time',
-        sallary:50,
-        author:'ROy'
-    },
-    {
-        jobTitle:'Web Developer',
-        type:'Full Time',
-        sallary:80,
-        author:'XYZ'
-    }
-
-]
 
 const AvailableJobs = () => {
+    const [jobs,setJobs]=useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/availableJobs')
+        .then(res => res.json())
+        .then(data=>{
+            setJobs(data)
+        })
+    },[])
+    console.log(jobs);
     return (
         <div>
             <h3 className="text-center">AvailableJobs</h3>
